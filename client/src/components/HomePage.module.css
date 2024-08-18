@@ -1,0 +1,26 @@
+.postDiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    border-bottom: 1px dashed salmon;
+}
+
+.postDiv:last-child {
+    border-bottom: none; /* Remove the border from the last .postDiv */
+}
+
+.title {
+    font-weight: 600;
+    font-size: larger;
+}
+
+.displayedPosts {
+    border: 2px solid salmon;
+    margin-top: 32px;
+}
+
+.username {
+    font-weight: bold;
+    font-size: large;
+}
