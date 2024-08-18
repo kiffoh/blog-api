@@ -69,13 +69,16 @@ function DisplayPost () {
     }
 
     const fetchPost = useCallback( async () => {
+        if (!user) {
+            return;
+        }
         try {
             const response = await fetch(`${backendUrl}/posts/${postId}`);
             
             if (response.ok) {
                 const data = await response.json();
 
-                if (!data.published) {
+                if (!data.published && user.id != data.authorId) {
                     // Redirect to an error page if the post is not published
                     navigate('/error', { state: { message: 'This post is not published yet.' } });
                     return;
@@ -96,7 +99,7 @@ function DisplayPost () {
         } finally {
             setLoading(false);
         }
-    }, [postId, navigate])
+    }, [postId, navigate, user])
 
 
     useEffect(() => {
