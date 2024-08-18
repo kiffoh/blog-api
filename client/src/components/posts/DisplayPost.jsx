@@ -18,7 +18,7 @@ function DisplayPost () {
     const [updatedTitle, setUpdatedTitle] = useState('');
     const [updatedContent, setUpdatedContent] = useState('');
 
-    const handleUpdateSubmit = async (event) => {
+    const handleUpdateSubmit = async (event, published = false) => {
         event.preventDefault();
         // Make an API call to update the post
         try {
@@ -29,7 +29,7 @@ function DisplayPost () {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify({ title: updatedTitle, content: updatedContent}),
+                body: JSON.stringify({ title: updatedTitle, content: updatedContent, published: published}),
             });
 
             if (response.ok) {
@@ -41,6 +41,10 @@ function DisplayPost () {
         } catch (error) {
             console.error('An error occurred:', error);
         }
+    };
+
+    const handlePublishClick = (event) => {
+        handleUpdateSubmit(event, true); // Pass `true` to indicate publishing
     };
 
     const handleDeleteBtn = async () => {
@@ -118,24 +122,35 @@ function DisplayPost () {
         <div>
             {post ? (
                 <>
-                    {user && post.authorId === user.id ? ( // Assuming you retrieve the logged-in user somehow
+                    {user && post.authorId === user.id ? (
                         editMode? (
                             <>
+                                <h1>Edit your post</h1>
                                 <form onSubmit={handleUpdateSubmit}>
-                                    <button type='submit'>Update</button>
-                                    <button onClick={() => setEditMode(false)}>Cancel</button>
-                                    <button onClick={handleDeleteBtn}>Delete</button>
+                                    <div className='btn-div'>
+                                        <button type='submit'>Save</button>
+                                        <button onClick={() => setEditMode(false)}>Cancel</button>
+                                    </div>
+
+                                    <label htmlFor="title">Post Title:</label>
                                     <input
                                         type="text"
                                         name="title"
                                         value={updatedTitle}
                                         onChange={e => setUpdatedTitle(e.target.value)}
                                     />
+
+                                    <label htmlFor="content">Content:</label>
                                     <textarea
                                         name="content"
                                         value={updatedContent}
                                         onChange={e => setUpdatedContent(e.target.value)}
                                     />
+
+                                    <div className='btn-div'>
+                                        <button onClick={handleDeleteBtn}>Delete</button>
+                                        <button onClick={handlePublishClick}>Publish</button>
+                                    </div>
                                 </form>
                             </>
                         ) : (
@@ -148,14 +163,19 @@ function DisplayPost () {
                                 <p>Last updated: {post.updatedAtTime}, {post.updatedAtDate}</p>
 
                                 <br></br>
-                                <h5>Comments</h5>
-                                <DisplayComments
-                                    post={post}
-                                    user={user}
-                                    backendUrl={backendUrl}
-                                    postId={postId}
-                                    fetchPost={fetchPost}
-                                />
+
+                                {post.published && 
+                                    <>
+                                        <h5>Comments</h5>
+                                        <DisplayComments
+                                            post={post}
+                                            user={user}
+                                            backendUrl={backendUrl}
+                                            postId={postId}
+                                            fetchPost={fetchPost}
+                                        />
+                                    </>
+                                }
                             </>
                         )
                     ) : (
