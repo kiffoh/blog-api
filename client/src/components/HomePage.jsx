@@ -70,8 +70,10 @@ function HomePage() {
                 </>             
                 ) : (
                     <>
-                        <Link to="/users/log-in">Log In</Link>
-                        <Link to="/users/sign-up">Sign Up</Link>
+                        <div className="btn-div">
+                            <Link to="/users/log-in">Log In</Link>
+                            <Link to="/users/sign-up">Sign Up</Link>
+                        </div>
                         <h1>Welcome to the blog</h1>
                     </>
                 )}
