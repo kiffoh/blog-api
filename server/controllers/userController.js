@@ -29,10 +29,16 @@ async function logIn (req, res, next) {
 
 // Sign up
 async function createUser (req, res) {
+    console.log('SIGN UP FUNCTION STARTED')
     const {username, email, password, admin} = req.body;
+    console.log('Username: ', username)
+    console.log('Email: ', email)
+    console.log('Password: ', password)
+    console.log('Admin: ', admin)
 
     try {
         const hashedPassword = await bcrypt.hash(password, 10); // Hash the password before storing
+        console.log('Hashed Password: ', hashedPassword)
         const newUser = await prisma.user.create({
             data: {
                 username,
@@ -41,6 +47,7 @@ async function createUser (req, res) {
                 admin
             }
         })
+        console.log('New user: ', newUser)
         res.status(201).json(newUser)
     } catch (err) {
         res.status(500).json({error: 'An error occurred while trying to create the user.'})
