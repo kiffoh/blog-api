@@ -25,7 +25,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(cors({ origin: 'http://localhost:5173' }));
+app.use(cors({ origin: 'https://loquacious-marzipan-4eada2.netlify.app' }));
 app.options('*', cors());
 
 app.use(passport.initialize());
