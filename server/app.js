@@ -13,6 +13,15 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const postRouter = require('./routes/posts');
 
+const dotenv = require('dotenv')
+
+const envFilePath = process.env.NODE_ENV ? `.env.${process.env.NODE_ENV}` : `.env`;
+
+dotenv.config({path: path.resolve(process.cwd(), envFilePath)})
+
+console.log(`Environment file loaded is: `, process.env.NODE_ENV)
+console.log("Database URL: ", process.env.DATABASE_URL)
+console.log("API URL: ", process.env.API_URL)
 
 var app = express();
 
@@ -25,7 +34,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(cors({ origin: 'https://blog-api-kipper.netlify.app' }));
+app.use(cors({ origin: process.env.API_URL }));
 app.options('*', cors());
 
 app.use(passport.initialize());
