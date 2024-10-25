@@ -10,7 +10,7 @@ function DisplayPosts ({posts, loading, error}) {
 
     return (
         <>
-            {posts? (
+            {posts.length > 0 ? (
                 <div className={styles.displayedPosts}>
                     {posts.map(post => (
                         <div key={post.id} className={styles.postDiv}>
