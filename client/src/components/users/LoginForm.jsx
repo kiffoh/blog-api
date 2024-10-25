@@ -77,7 +77,7 @@ function LoginForm() {
                 />
 
                 <div className='btn-div'>
-                    <button className="sign-up-btn" onClick={() => navigate("/users/sign-up")}>Sign Up</button>
+                    <button className="sign-up-btn" onClick={() => navigate("/users/sign-up")} type='button'>Sign Up</button>
                     <button type='submit'>Log In</button>
                 </div>
             </form>
