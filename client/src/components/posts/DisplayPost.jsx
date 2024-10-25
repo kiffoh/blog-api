@@ -74,6 +74,8 @@ function DisplayPost () {
 
     const fetchPost = useCallback( async () => {
         if (!user) {
+            setLoading(false);
+            setError(<div>Please <Link to="/users/log-in">Log in</Link> to view the post.</div>)
             return;
         }
         try {
