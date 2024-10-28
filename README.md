@@ -50,18 +50,30 @@ A modern blog platform built with React and Express.js, featuring:
 
 ```
 blog-api/
-├── client/                 # React frontend
-│   ├── src/
-│   │   ├── components/    # React components
-│   │   ├── pages/        # Page components
-│   │   └── services/     # API service calls
+├── client/             # React frontend
+    ├── public/           # Static assets (e.g., icons, images)
+    ├── src/
+        ├── components/    # React components
+        ├── pages/        # Page components
+        └── services/     # API service calls
+    ├── .env files        # Environment configuration
+    ├── .gitignore        # Git ignore file
+    ├── eslint.config.js  # ESLint configuration
+    ├── index.html        # HTML entry point
+    ├── package-lock.json # Dependency lock file
+    ├── package.json      # Node.js project manifest
+    └── vite.config.js    # Vite configuration
 ├── server/                # Express backend
-│   ├── controllers/      # Route controllers
-│   ├── middleware/       # Custom middleware
-│   ├── routes/          # API routes
-│   └── prisma/          # Database schema and migrations
-├── tests/               # Test suites
-└── README.md
+    ├── config/             # Custom middleware
+    ├── controllers/        # Route controllers
+    ├── bin/                # Server entry point
+    ├── routes/             # API routes
+    └── prisma/             # Database schema and migrations
+    ├── .env files          # Environment configuration
+    ├── .gitignore          # Git ignore file
+    ├── app.js              # Server entry point
+    ├── package-lock.json   # Dependency lock file
+    └── package.json        # Node.js project manifest
 ```
 
 ## Technologies
@@ -107,9 +119,14 @@ blog-api/
    npm install
    ```
 
-## **Environment Setup**
+### **Environment Setup**
 To set up your environment, create a `.env` file in the root folder of your project (e.g. in the client and server folder). This file should contain the following required environment variables, along with descriptions for each:
 
+## **Frontend**
+- **VITE_ENV**: Set to `development` or `production` to specify the environment.
+- **VITE_SERVER_URL**: URL for your backend application
+
+### **Backend**
 ### Server Configuration
 - **NODE_ENV**: Set to `development` or `production` to specify the environment.
 - **JWT_SECRET**: Secret key for signing tokens
@@ -117,15 +134,10 @@ To set up your environment, create a `.env` file in the root folder of your proj
 
 ### Database Configuration
 - **DATABASE_URL**: Connection string for your database
-   
-   # Required variables:
-   DATABASE_URL="postgresql://..."
-   JWT_SECRET="your-secret-key"
-   ```
 
 If you want to have separate environment files for production and development, you can create `.env.production` and `.env.development`. You will also need to set the `NODE_ENV` variable in the command line or use the `cross-env` package (already a dependency) for Windows users. 
 
-### Example `.env.development` File
+### Example `.env.development` File for Backend
 ```bash
 NODE_ENV=development
 DATABASE_URL=database-url
@@ -137,7 +149,7 @@ JWT_SECRET='your-secret-key'
 - Ensure that you replace the placeholder values with your actual configuration.
 - Keep your `.env` file out of version control by adding it to your `.gitignore`.
 
-## **Database Schema**
+### **Database Schema**
 The schema is implemented using Prisma with PostgreSQL as the database provider.
 
 To apply the database schema migrations, run the following command:
@@ -165,7 +177,7 @@ npm run dev
 
 Run the frontend:
 ```bash
-cd client
+cd ../client
 npm run dev
 ```
 
