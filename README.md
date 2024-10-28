@@ -185,7 +185,7 @@ npm run dev
 
 ### Authentication
 
-All protected routes require a JWT token in the Authorization header:
+All protected routes require a JWT token in the Authorisation header:
 ```
 Authorization: Bearer <your_jwt_token>
 ```
