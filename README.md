@@ -68,7 +68,7 @@ blog-api/
     ├── controllers/        # Route controllers
     ├── bin/                # Server entry point
     ├── routes/             # API routes
-    └── prisma/             # Database schema and migrations
+    ├── prisma/             # Database schema and migrations
     ├── .env files          # Environment configuration
     ├── .gitignore          # Git ignore file
     ├── app.js              # Server entry point
@@ -94,13 +94,13 @@ blog-api/
 
 ## Getting Started
 
-### Prerequisites
+## Prerequisites
 
 - Node.js (v18 or higher)
 - npm or yarn
 - PostgreSQL database
 
-### Installation
+## Installation
 
 1. Clone the repository:
    ```bash
@@ -119,20 +119,20 @@ blog-api/
    npm install
    ```
 
-### **Environment Setup**
-To set up your environment, create a `.env` file in the root folder of your project (e.g. in the client and server folder). This file should contain the following required environment variables, along with descriptions for each:
+## **Environment Setup**
+To set up your environment, create a `.env` file in the root folders of your project (e.g. in the client and server folder). These files should contain the following required environment variables, along with descriptions for each:
 
-## **Frontend**
+### **Frontend Configuration**
 - **VITE_ENV**: Set to `development` or `production` to specify the environment.
 - **VITE_SERVER_URL**: URL for your backend application
 
-### **Backend**
-### Server Configuration
+### **Backend Configuration**
+#### Server Configuration
 - **NODE_ENV**: Set to `development` or `production` to specify the environment.
 - **JWT_SECRET**: Secret key for signing tokens
 - **FRONTEND_URL**: URL for your frontend application
 
-### Database Configuration
+#### Database Configuration
 - **DATABASE_URL**: Connection string for your database
 
 If you want to have separate environment files for production and development, you can create `.env.production` and `.env.development`. You will also need to set the `NODE_ENV` variable in the command line or use the `cross-env` package (already a dependency) for Windows users. 
@@ -149,7 +149,7 @@ JWT_SECRET='your-secret-key'
 - Ensure that you replace the placeholder values with your actual configuration.
 - Keep your `.env` file out of version control by adding it to your `.gitignore`.
 
-### **Database Schema**
+## **Database Schema**
 The schema is implemented using Prisma with PostgreSQL as the database provider.
 
 To apply the database schema migrations, run the following command:
@@ -168,7 +168,7 @@ Alternatively, you can use the commands defined in the package.json, which allow
 - **Windows users**: You must use `cross-env` to set environment variables, as shown in the `package.json` commands.
 - **macOS/Linux users**: You can remove `cross-env` from the commands, as environment variables can be set directly in the terminal.
 
-### Development
+## Development
 
 Run the backend:
 ```bash
