@@ -59,23 +59,25 @@ function LoginForm() {
             <h1>Log In</h1>
             <form onSubmit={handleSubmit}>
                 {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
-                <label htmlFor='email'><h2>Email</h2> 
+                <label htmlFor='email'><h2 className={styles['label-h2']}>Email</h2> 
                     <input 
                     type='email'
                     name='email'
                     placeholder='ilovethisblog@bloglovers.blog'
                     value={email}
                     onChange={e => setEmail(e.target.value)}
+                    className={styles.input}
                     />
                 </label>
                 
-                <label htmlFor='password'><h2>Password</h2>
+                <label htmlFor='password'><h2 className={styles['label-h2']}>Password</h2>
                     <input 
                     type='password'
                     name='password'
                     placeholder='********'
                     value={password}
                     onChange={e => setPassword(e.target.value)}
+                    className={styles.input}
                     />
                 </label>
 

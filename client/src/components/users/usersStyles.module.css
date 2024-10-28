@@ -1,4 +1,4 @@
-input {
+.input {
     line-height: 1.1;
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     color: #213547;
@@ -11,6 +11,6 @@ input {
     font-size: large;
 }
 
-label h2 {
+.label-h2 {
     font-weight: 400;
 }
