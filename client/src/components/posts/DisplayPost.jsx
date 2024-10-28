@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import useAuth from '../../useAuth';
 import { Link } from 'react-router-dom';
 import DisplayComments from './DisplayComments';
+import styles from './DisplayPost.module.css'
 
 const backendUrl = import.meta.env.VITE_SERVER_URL;
 
@@ -124,51 +125,56 @@ function DisplayPost () {
         <div>
             {post ? (
                 <>
-                    {user && post.authorId === user.id ? (
+                    {user && post.authorId === user.id ? ( // User wrote the post
                         editMode? (
                             <>
-                                <h1>Edit your post</h1>
+                                <h1 className={styles['edit-title']}>Edit your post</h1>
                                 <form onSubmit={handleUpdateSubmit}>
                                     <div className='btn-div'>
-                                        <button type='submit'>Save</button>
-                                        <button onClick={() => setEditMode(false)}>Cancel</button>
+                                        <button type='submit' className={styles['save-btn']}>Save</button>
+                                        <button onClick={() => setEditMode(false)} className={styles['cancel-btn']}>Cancel</button>
                                     </div>
 
-                                    <label htmlFor="title">Post Title:</label>
-                                    <input
-                                        type="text"
-                                        name="title"
-                                        value={updatedTitle}
-                                        onChange={e => setUpdatedTitle(e.target.value)}
-                                    />
+                                    <label htmlFor="title" className={styles['title-edit-container']}><h2>Title</h2>
+                                        <input
+                                            type="text"
+                                            name="title"
+                                            value={updatedTitle}
+                                            onChange={e => setUpdatedTitle(e.target.value)}
+                                            className={styles['title-edit']}
+                                        />
+                                    </label>
 
-                                    <label htmlFor="content">Content:</label>
-                                    <textarea
-                                        name="content"
-                                        value={updatedContent}
-                                        onChange={e => setUpdatedContent(e.target.value)}
-                                    />
+                                    <label htmlFor="content" className={styles['content-edit-container']}><h2>Content</h2>
+                                        <textarea
+                                            name="content"
+                                            value={updatedContent}
+                                            onChange={e => setUpdatedContent(e.target.value)}
+                                            className={styles['content-edit']}
+                                        />
+                                    </label>
 
                                     <div className='btn-div'>
-                                        <button onClick={handleDeleteBtn}>Delete</button>
-                                        <button onClick={handlePublishClick}>Publish</button>
+                                        <button onClick={handleDeleteBtn} className={styles['delete-btn']}>Delete</button>
+                                        <button onClick={handlePublishClick} className={styles['publish-btn']}>Publish</button>
                                     </div>
                                 </form>
                             </>
                         ) : (
                             <>
-                                <button onClick={() => setEditMode(true)}>Edit</button>
-                                <Link to='/'>Home</Link>
+                                <div className={styles['edit-home-btns']}>
+                                    <Link to='/'>Home</Link>
+                                    <button onClick={() => setEditMode(true)} className={styles['edit-btn']}>Edit</button>
+                                </div>
                                 <h1>{post.title}</h1>
-                                <p>Author: {post.author.username}</p>
+                                <h2 className={`${styles['author-title']} ${styles['author-is-user']}`}>{post.author.username}</h2>
                                 <p>{post.content}</p>
-                                <p>Last updated: {post.updatedAtTime}, {post.updatedAtDate}</p>
+                                <p className={styles['last-updated']}><span className={styles.text}>Updated: </span>{post.updatedAtTime}, {post.updatedAtDate}</p>
 
                                 <br></br>
 
                                 {post.published && 
                                     <>
-                                        <h5>Comments</h5>
                                         <DisplayComments
                                             post={post}
                                             user={user}
@@ -185,15 +191,14 @@ function DisplayPost () {
                             <div>
                                 <Link to='/'>Home</Link>
                                 <h1>{post.title}</h1>
-                                <p>Author: {post.author.username}</p>
+                                <h2 className={styles['author-title']}>{post.author.username}</h2>
                                 <p>{post.content}</p>
-                                <p>Last updated: {post.updatedAtTime}, {post.updatedAtDate}</p>
+                                <p className={styles['last-updated']}><span className={styles.text}>Updated: </span> {post.updatedAtTime}, {post.updatedAtDate}</p>
                                 <br></br>
                             </div>
                         
                             {user ? (
                                 <>
-                                    <h5>Comments</h5>
                                     <DisplayComments
                                         post={post}
                                         user={user}

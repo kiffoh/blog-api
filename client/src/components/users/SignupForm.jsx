@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAuth from '../../useAuth';
+import styles from './usersStyles.module.css';
 const backendUrl = import.meta.env.VITE_SERVER_URL;
 
 function SignupForm() {
@@ -57,32 +58,35 @@ function SignupForm() {
             <h1>Sign up</h1>
             <form onSubmit={handleSubmit}>
                 {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
-                <label htmlFor='email'>Email: </label>
-                <input 
-                type='email'
-                name='email'
-                placeholder='ilovethisblog@bloglovers.blog'
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-                />
+                <label htmlFor='email'><h2>Email</h2>
+                    <input 
+                    type='email'
+                    name='email'
+                    placeholder='ilovethisblog@bloglovers.blog'
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    />
+                </label>
 
-                <label htmlFor='username'>Username: </label>
-                <input
-                type='text'
-                name='username'
-                placeholder='username'
-                value={username}
-                onChange={e => setUsername(e.target.value)}
-                />
+                <label htmlFor='username'><h2>Username</h2>
+                    <input
+                    type='text'
+                    name='username'
+                    placeholder='username'
+                    value={username}
+                    onChange={e => setUsername(e.target.value)}
+                    />
+                </label>
                 
-                <label htmlFor='password'>Password: </label>
-                <input 
-                type='password'
-                name='password'
-                placeholder='********'
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-                />
+                <label htmlFor='password'><h2>Password</h2>
+                    <input 
+                    type='password'
+                    name='password'
+                    placeholder='********'
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                    />
+                </label>
 
                 <button type='submit'>Sign Up</button>
             </form>

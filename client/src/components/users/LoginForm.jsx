@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import useAuth from '../../useAuth';
 import { useNavigate  } from 'react-router-dom';
 import {jwtDecode} from 'jwt-decode';
+import styles from './usersStyles.module.css';
 const backendUrl = import.meta.env.VITE_SERVER_URL;
 
 function LoginForm() {
@@ -58,23 +59,25 @@ function LoginForm() {
             <h1>Log In</h1>
             <form onSubmit={handleSubmit}>
                 {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
-                <label htmlFor='email'>Email: </label>
-                <input 
-                type='email'
-                name='email'
-                placeholder='ilovethisblog@bloglovers.blog'
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-                />
+                <label htmlFor='email'><h2>Email</h2> 
+                    <input 
+                    type='email'
+                    name='email'
+                    placeholder='ilovethisblog@bloglovers.blog'
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    />
+                </label>
                 
-                <label htmlFor='password'>Password: </label>
-                <input 
-                type='password'
-                name='password'
-                placeholder='********'
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-                />
+                <label htmlFor='password'><h2>Password</h2>
+                    <input 
+                    type='password'
+                    name='password'
+                    placeholder='********'
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                    />
+                </label>
 
                 <div className='btn-div'>
                     <button className="sign-up-btn" onClick={() => navigate("/users/sign-up")} type='button'>Sign Up</button>

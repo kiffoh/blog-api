@@ -1,0 +1,16 @@
+input {
+    line-height: 1.1;
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    color: #213547;
+    padding: 10px 15px;
+    width: auto;
+    max-width: 100%;
+    border-radius: 8px;
+    border-color: #5d6063;
+    border-style: solid;
+    font-size: large;
+}
+
+label h2 {
+    font-weight: 400;
+}

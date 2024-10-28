@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 
 passport.use(new JwtStrategy({
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-    secretOrKey: 'secretKey'
+    secretOrKey: process.env.JWT_SECRET
 }, async (jwtPayload, done) => {
     try {
         console.log('JWT Payload:', jwtPayload);

@@ -7,7 +7,7 @@
     "start": "cross-env NODE_ENV=production node ./bin/www",
     "dev": "cross-env NODE_ENV=development nodemon ./bin/www",
     "migrate:dev": "cross-env DATABASE_URL=development-url npx prisma migrate dev",
-    "migrate:prod": "cross-env DATABASE_URL=production-url npx prisma migrate dev"
+    "migrate:prod": "cross-env DATABASE_URL=postgresql://neondb_owner:mzh1frd0nqZO@ep-delicate-haze-a2r50q2d.eu-central-1.aws.neon.tech/neondb?sslmode=require npx prisma migrate dev"
   },
   "dependencies": {
     "@prisma/client": "^5.18.0",

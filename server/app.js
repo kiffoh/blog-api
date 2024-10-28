@@ -1,19 +1,5 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-const passport = require('passport');
-const cors = require('cors');
-
-require('./config/passport');
-require('./config/passportJWT'); // This requires and initializes the JWT Strategy
-
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-const postRouter = require('./routes/posts');
-
 const dotenv = require('dotenv')
+var path = require('path');
 
 const envFilePath = process.env.NODE_ENV ? `.env.${process.env.NODE_ENV}` : `.env`;
 
@@ -22,6 +8,23 @@ dotenv.config({path: path.resolve(process.cwd(), envFilePath)})
 console.log(`Environment file loaded is: `, process.env.NODE_ENV)
 console.log("Database URL: ", process.env.DATABASE_URL)
 console.log("API URL: ", process.env.API_URL)
+console.log("JWT_SECRET: ", process.env.JWT_SECRET);
+
+var createError = require('http-errors');
+var express = require('express');
+var cookieParser = require('cookie-parser');
+var logger = require('morgan');
+const passport = require('passport');
+const cors = require('cors');
+
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
+const postRouter = require('./routes/posts');
+
+
+
+require('./config/passport');
+require('./config/passportJWT'); // This requires and initializes the JWT Strategy
 
 var app = express();
 

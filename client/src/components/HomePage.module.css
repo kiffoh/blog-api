@@ -4,6 +4,7 @@
     align-items: center;
     padding: 16px;
     border-bottom: 1px dashed salmon;
+    gap: 1em;
 }
 
 .postDiv:last-child {
