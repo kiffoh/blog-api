@@ -74,11 +74,6 @@ function DisplayPost () {
     }
 
     const fetchPost = useCallback( async () => {
-        if (!user) {
-            setLoading(false);
-            setError(<div>Please <Link to="/users/log-in">Log in</Link> to view the post.</div>)
-            return;
-        }
         try {
             const response = await fetch(`${backendUrl}/posts/${postId}`);
             
@@ -207,7 +202,7 @@ function DisplayPost () {
                                     />
                                 </>
                             ) : (
-                                <h6><Link to="/users/log-in">Log In</Link> to view the comments for this post.</h6>
+                                <h2><Link to="/users/log-in">Log In</Link> to view the comments for this post.</h2>
                             )}
                         </>
                     )}
