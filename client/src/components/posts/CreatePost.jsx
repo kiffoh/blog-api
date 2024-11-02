@@ -23,7 +23,7 @@ function CreatePost() {
     }, [content]); // Adjust height when content changes
 
 
-    if (!user) return <div>Please <Link to="/users/log-in">Log In</Link> to create a post.</div>
+    if (!user) return <h2>Please <Link to="/users/log-in">Log In</Link> to create a post.</h2>
 
     const handlePublish = async (event, publishStatus) => {
         event.preventDefault();
