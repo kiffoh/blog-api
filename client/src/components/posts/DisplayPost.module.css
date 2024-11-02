@@ -127,14 +127,14 @@ textarea::-webkit-scrollbar {
 
 .title-edit {
     font-size: 3.2em;
-    line-height: 1.1;
     border: none;
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     font-weight: bold;
     color: #213547;
     padding: 10px 15px;
-    width: auto;
+    width: 100%;
     max-width: 100%;
+    box-sizing: border-box; 
 }
 
 .title-edit-container, .content-edit-container {
@@ -142,7 +142,10 @@ textarea::-webkit-scrollbar {
 }
 
 .title-edit-container {
-    width: max-content;
+    width: 100%; 
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 0 1rem;
 }
 
 .content-edit {
