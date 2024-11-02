@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef } from "react"
 import useAuth from "../../useAuth";
 import { Link, useNavigate } from "react-router-dom";
+import styles from './DisplayPost.module.css'
 // Another question I have. If I am validating data on the backend, should I do it on the fronend as well?
 // How do I validate it in the same way?
 const backendUrl = import.meta.env.VITE_SERVER_URL;
@@ -63,32 +64,39 @@ function CreatePost() {
         <>
             <h1>Create a new post</h1>
             <form onSubmit={handlePublish}>
-            {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
-            <label htmlFor="title">Post Title:</label>
-            <input 
-                type="text"
-                name="title"
-                placeholder="The greatest emotion"
-                value={title}
-                onChange={e => setTitle(e.target.value)}
-            />
+                {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+                <label htmlFor="title" className={styles['title-edit-container']}><h2>Title</h2>
+                    <input 
+                        type="text"
+                        name="title"
+                        placeholder="The greatest emotion"
+                        value={title}
+                        onChange={e => setTitle(e.target.value)}
+                        className={styles['title-edit']}
+                    />
+                </label>
 
-            <label htmlFor="content">Content:</label>
-            <textarea 
-                ref={textareaRef}
-                name="content"
-                placeholder="To be postive and complacent... "
-                value={content}
-                onChange={e => setContent(e.target.value)}
-                style={{ overflow: "hidden" }} // Hide scrollbars
-                rows="3" // Start with one row
-            />
-            <div className="btn-div">   
-                <button type="button" onClick={(e) => handlePublish(e, false)}>Save</button>
-                <button type="button" onClick={(e) => handlePublish(e, true)}>Publish</button>
-            </div>
-            
-        </form>
+                <label htmlFor="content" className={styles['content-edit-container']}><h2>Content</h2>
+                    <textarea 
+                        ref={textareaRef}
+                        name="content"
+                        placeholder="To be positive and complacent... "
+                        value={content}
+                        onChange={e => setContent(e.target.value)}
+                        style={{ overflow: "hidden" }} // Hide scrollbars
+                        rows="3" // Start with one row
+                        className={styles['content-edit']}
+                    />
+                </label>
+
+                <div className="btn-div">
+                    <button type="button" onClick={() => navigate('/')}>Cancel</button>
+                    <div className={styles['progression-btns']}>
+                        <button type="button" onClick={(e) => handlePublish(e, false)}>Save</button>
+                        <button type="button" onClick={(e) => handlePublish(e, true)}>Publish</button>
+                    </div>
+                </div>
+            </form>
         </>
         
     )
