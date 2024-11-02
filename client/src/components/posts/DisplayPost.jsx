@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import useAuth from '../../useAuth';
 import { Link } from 'react-router-dom';
@@ -108,6 +108,25 @@ function DisplayPost () {
         fetchPost();
     }, [fetchPost]);
 
+
+    // Functions to automatically adjust the size of the edit textareas based on the content in them
+    const updatedContentRef = useRef(null);
+    const updatedTitleRef = useRef(null);
+
+    useEffect(() => {
+        if (updatedTitleRef.current) {
+            updatedTitleRef.current.style.height = "auto";
+            updatedTitleRef.current.style.height = `${updatedTitleRef.current.scrollHeight}px`;
+        }
+    }, [updatedTitle]);
+
+    useEffect(() => {
+        if (updatedContentRef.current) {
+            updatedContentRef.current.style.height = "auto"; // Reset the height
+            updatedContentRef.current.style.height = `${updatedContentRef.current.scrollHeight}px`; // Set height based on scroll height
+        }
+    }, [updatedContent]); // Adjust height when content changes
+
     if (loading) {
         return <div>Loading...</div>; // Display a loading message
     }
@@ -131,17 +150,24 @@ function DisplayPost () {
                                     </div>
 
                                     <label htmlFor="title" className={styles['title-edit-container']}><h2>Title</h2>
-                                        <input
-                                            type="text"
+                                        <textarea
+                                            ref={updatedTitleRef}
                                             name="title"
                                             value={updatedTitle}
                                             onChange={e => setUpdatedTitle(e.target.value)}
                                             className={styles['title-edit']}
+                                            onKeyDown={(e) => {
+                                                if (e.key === 'Enter') {
+                                                    e.preventDefault();
+                                                }
+                                            }}
+                    
                                         />
                                     </label>
 
                                     <label htmlFor="content" className={styles['content-edit-container']}><h2>Content</h2>
                                         <textarea
+                                            ref={updatedContentRef}
                                             name="content"
                                             value={updatedContent}
                                             onChange={e => setUpdatedContent(e.target.value)}

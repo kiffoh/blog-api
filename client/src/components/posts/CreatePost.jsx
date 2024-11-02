@@ -13,12 +13,21 @@ function CreatePost() {
     const [errorMessage, setErrorMessage] = useState('');
     const { user } = useAuth();
     const navigate = useNavigate();
-    const textareaRef = useRef(null);
+
+    const contentRef = useRef(null);
+    const titleRef = useRef(null);
 
     useEffect(() => {
-        if (textareaRef.current) {
-            textareaRef.current.style.height = "auto"; // Reset the height
-            textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`; // Set height based on scroll height
+        if (titleRef.current) {
+            titleRef.current.style.height = "auto";
+            titleRef.current.style.height = `${titleRef.current.scrollHeight}px`;
+        }
+    }, [title]);
+
+    useEffect(() => {
+        if (contentRef.current) {
+            contentRef.current.style.height = "auto"; // Reset the height
+            contentRef.current.style.height = `${contentRef.current.scrollHeight}px`; // Set height based on scroll height
         }
     }, [content]); // Adjust height when content changes
 
@@ -66,19 +75,27 @@ function CreatePost() {
             <form onSubmit={handlePublish}>
                 {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
                 <label htmlFor="title" className={styles['title-edit-container']}><h2>Title</h2>
-                    <input 
-                        type="text"
+                    <textarea 
+                        ref={titleRef}
                         name="title"
                         placeholder="The greatest emotion"
                         value={title}
                         onChange={e => setTitle(e.target.value)}
                         className={styles['title-edit']}
+                        rows="1"
+                        onKeyDown={(e) => {
+                            // Prevent enter key from creating new lines
+                            // Only want this with the title
+                            if (e.key === 'Enter') {
+                                e.preventDefault();
+                            }
+                        }}
                     />
                 </label>
 
                 <label htmlFor="content" className={styles['content-edit-container']}><h2>Content</h2>
                     <textarea 
-                        ref={textareaRef}
+                        ref={contentRef}
                         name="content"
                         placeholder="To be positive and complacent... "
                         value={content}
