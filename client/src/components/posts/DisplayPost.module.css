@@ -149,3 +149,8 @@ textarea::-webkit-scrollbar {
     background-color: white;
     box-sizing: border-box;
 }
+
+.progression-btns {
+    display: flex;
+    gap: 1em;
+}
