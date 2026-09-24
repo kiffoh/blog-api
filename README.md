@@ -1,6 +1,6 @@
 # Blog API
 
-This project, developed as part of the [Odin Project](https://www.theodinproject.com/lessons/nodejs-messaging-app), is a full-stack blog platform featuring a React frontend and a RESTful API. Users can create, read, update, and delete blog posts and comments with secure JWT authentication.
+This project, developed as part of the [Odin Project](https://www.theodinproject.com/lessons/node-path-nodejs-blog-api), is a full-stack blog platform featuring a React frontend and a RESTful API. Users can create, read, update, and delete blog posts and comments with secure JWT authentication.
 
 ## 📚 Table of Contents
 
@@ -29,7 +29,7 @@ A modern blog platform built with React and Express.js, featuring:
 - Clean, responsive UI built with React and Vite
 - Secure REST API with JWT authentication
 - CRUD operations for posts and comments
-- Role-based authorisation
+- Ownership-based authorisation
 - PostgreSQL database with Prisma ORM
 
 ## Features
@@ -38,7 +38,7 @@ A modern blog platform built with React and Express.js, featuring:
 - ✍️ Create and manage blog posts
 - 💬 Engage through comments
 - 👤 User profiles
-- 🛡️ Role-based access control
+- 🛡️ Ownership-based access control
 - 📱 Responsive design
 
 ## Demo
@@ -160,8 +160,10 @@ npx prisma migrate dev
 Alternatively, you can use the commands defined in the package.json, which allow specifying the development or production database:
 ```bash
 "migrate:dev": "cross-env DATABASE_URL=development-url npx prisma migrate dev",
-"migrate:prod": "cross-env DATABASE_URL=production-url npx prisma migrate dev",
+"migrate:prod": "cross-env DATABASE_URL=$PROD_DATABASE_URL npx prisma migrate dev",
 ```
+
+`migrate:prod` reads the production connection string from a `PROD_DATABASE_URL` environment variable, so it is never stored in the repository.
 
 ### Notes
 - **Environment-specific migrations**: Ensure that you set the `NODE_ENV` to either `development` or `production` before running the migration commands.
